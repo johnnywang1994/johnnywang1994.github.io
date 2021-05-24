@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>JW Password Transformer</title>
+  <link rel="stylesheet" href="mytools.min.css">
+  <style>
+  #form-wrapper {
+    max-width: 1170px;
+    margin: auto;
+  }
+  #form {
+    max-width: 300px;
+    margin: 60px auto;
+  }
+  </style>
+</head>
+<body>
+  <div id="form-wrapper">
+    <div id="form">
+      <label for="pwd">密碼</label>
+      <input type="text" id="pwd" class="input-text-sm"><br>
+      <button id="btnToSave">轉換為儲存用密碼</button>
+      <button id="btnToUse">轉換為真實密碼</button><br><br>
+      轉用密碼：<span id="output"></span>
+    </div>
+  </div>
+  <script src="index.js"></script>
+</body>
+</html>
