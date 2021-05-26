@@ -9,7 +9,7 @@ const { ExpirationPlugin } = workbox.expiration;
 registerRoute(
   ({ request, sameOrigin }) => {
     const { destination } = request;
-    const cacheDestinations = ['style', 'script'];
+    const cacheDestinations = ['style', 'script', 'image'];
     return !sameOrigin && cacheDestinations.includes(destination);
   },
   new StaleWhileRevalidate({
