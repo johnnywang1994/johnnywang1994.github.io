@@ -27,13 +27,7 @@ registerRoute(
 registerRoute(
   ({ request, sameOrigin }) => {
     const { destination } = request;
-    const cacheDestinations = ['image', 'script', 'style'];
-    const neverCache = ['service-worker.js', 'sw.js'];
-    neverCache.forEach((filename) => {
-      if (request.url.includes(filename)) {
-        return false;
-      }
-    });
+    const cacheDestinations = ['image', 'script', 'style', 'document'];
     return sameOrigin && cacheDestinations.includes(destination);
   },
   new StaleWhileRevalidate({
@@ -69,3 +63,20 @@ registerRoute(
   }),
 )
 
+/* Cache all for unexpect network offline */
+registerRoute(
+  () => true,
+  new StaleWhileRevalidate({
+    cacheName: 'offline',
+    plugins: [
+      // Ensure that only requests that result in a 200 status are cached
+      new CacheableResponsePlugin({
+        statuses: [200],
+      }),
+      new ExpirationPlugin({
+        maxEntries: 50,
+        maxAgeSeconds: 60 * 60 * 24 * 1, // 1 Days
+      }),
+    ],
+  }),
+)
