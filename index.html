@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Johnny Wang Blog</title>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Anton&family=Kanit:wght@400;500&family=Noto+Sans+TC:wght@400;500;700;900&family=Roboto:wght@300;400;500;700;900&display=swap&subset=chinese-traditional,latin-ext,vietnamese");body {  margin: 0;  font-family: Roboto;  background: rgba(0, 0, 0, 0.5); }section {  position: relative;  height: 800px;  margin: 0 20px;  z-index: 1; }  section .content {    position: sticky;    position: -webkit-sticky;    top: 40%;    background: rgba(255, 255, 255, 0.5);    backdrop-filter: blur(5px);    padding: 20px;    margin-bottom: 25px;    border-radius: 15px;    box-shadow: 1px 2px 8px rgba(0, 0, 0, 0.4); }    section .content > h3 {      font-size: 35px; }    section .content a {      color: #00b4dd;      text-decoration: none; }  section:nth-of-type(2) {    color: red; }  section:nth-of-type(3) {    color: blue; }  section:nth-of-type(4) {    color: yellow; }  section:nth-of-type(5) {    color: green; }.parallax-video {  position: fixed;  top: 0;  left: 0;  width: 100%;  height: 100%;  object-fit: cover; }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/vue@latest/dist/vue.min.js"></script>
+  <script>
+    function useParallaxVideo({container:e=document.body,videoClass:t="parallax-video",videoUrls:i=["http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"],playbackConst:n=100}={}){const o=window.requestAnimationFrame||window.mozRequestAnimationFrame||window.webkitRequestAnimationFrame||window.msRequestAnimationFrame||function(e){return setTimeout(e,1e3/60)},a=window.cancelAnimationFrame||window.mozCancelAnimationFrame||function(e){clearTimeout(e)},r=document.createElement("div"),s=document.createElement("video");let d=!1,m=-1,u=0;function c(){u=window.pageYOffset/n,s.currentTime=u,m=o(c)}return s.classList.add(t),s.setAttribute("autoplay",""),s.setAttribute("preload",""),s.setAttribute("playsinline",""),s.setAttribute("muted",""),s.innerHTML=i.reduce((e,t)=>`${e}<source src="${t}" />`,""),s.addEventListener("loadedmetadata",function(){d=!0;const t=e.offsetHeight;if(t>0)n=Math.floor(t/Math.ceil(s.duration));else{const t=Math.floor(s.duration)*n;r.style.height=t+"px",e.appendChild(r)}}),e.appendChild(s),{videoEl:s,start:function e(){d?m=o(c):setTimeout(e,500)},stop(){a(m)}}}
+  </script>
+</head>
+<body>
+  <div id="app">
+    <section>
+      <div class="content">
+        <h3>Johnny has something to tell you!</h3>
+        <button v-if="!inited" @click="playVideo">Play</button>
+      </div>
+    </section>
+
+    <section>
+      <div class="content">
+        <h3>Johnny is a Frontend Developer!</h3>
+      </div>
+    </section>
+
+    <section>
+      <div class="content">
+        <h3>Johnny is Awesome!</h3>
+      </div>
+    </section>
+
+    <section>
+      <div class="content">
+        <h3>Johnny is proficient in Web Development!</h3>
+      </div>
+    </section>
+
+    <section>
+      <div class="content">
+        <h3>Thanks for watching!</h3>
+        <p><a href="/book">>> Have a look at JohnnyWang's Blog <<</a></p>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    new Vue({
+      el: '#app',
+      data() {
+        return {
+          inited: false
+        }
+      },
+      methods: {
+        playVideo() {
+          if (this.inited) return;
+          const { videoEl, start } = useParallaxVideo();
+          this.inited = true;
+          videoEl.play();
+          start();
+          setTimeout(() => {
+            videoEl.pause();
+          }, 200);
+        }
+      }
+    })
+  </script>
+</body>
+</html>
