@@ -1,7 +1,7 @@
 ((global) => {
   const arteryGearPilots = [{
     title: '莱莎琳·斯托特',
-    imageUrl: 'https://patchwiki.biligame.com/images/ag/7/71/nk9zkwo6e6ubd33bf7i1pwiar0elfmb.png',
+    imageUrl: 'https://patchwiki.biligame.com/images/ag/2/29/lg2y4xp4twunj4slqe910ee73nu09c4.png',
     drawUrl: 'https://wiki.biligame.com/ag/%E6%96%87%E4%BB%B6:Spr_AGbigcard_100000158.png'
   }, {
     title: '特斐尔',
